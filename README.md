@@ -41,4 +41,8 @@ echo "umask 0022" >> ~/.bashrc
 source ~/.bashrc
 ```
 ## Workaround for fakeroot
-Try to launch ```fakeroot```
+On version 15063.296, fakeroot doesn't work and return this error :
+``` fakeroot, while creating message channels: Function not implemented This may be due to a lack of SYSV IPC support. ```
+Instead you can use  ```fakeroot-tcp```
+```Tony@DESKTOP-H7870G9:~$ fakeroot-tcp whoami
+root```
