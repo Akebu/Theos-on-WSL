@@ -47,7 +47,11 @@ On version 15063.296, fakeroot doesn't work and return this error :
 
 Instead you can use  ```fakeroot-tcp```
 
-Navigate in  ```/opt/theos/makefiles/package/ ``` and edit deb.mk line 42 :
+Navigate in  ```/opt/theos/makefiles/package/ ``` and replace deb.mk line 42 :
 ```
 $(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r $(_THEOS_PLATFORM_DPKG_DEB) -Z$(_THEOS_PLATFORM_DPKG_DEB_COMPRESSION) -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)"$(ECHO_END)
+```
+by
+```
+$(ECHO_NOTHING)COPYFILE_DISABLE=1 fakeroot-tcp $(_THEOS_PLATFORM_DPKG_DEB) -Z$(_THEOS_PLATFORM_DPKG_DEB_COMPRESSION) -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)"$(ECHO_END)
 ```
