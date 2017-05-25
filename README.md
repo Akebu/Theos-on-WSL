@@ -56,3 +56,4 @@ Instead you can use  ```fakeroot-tcp```, so we need to replace a line in /opt/th
 sudo sed -i 's/\$(FAKEROOT) -r/fakeroot-tcp/g'  /opt/theos/makefiles/package/deb.mk
 ```
 Enjoy!
+![alt text](https://akebu.github.io/cydia/wsl_working.PNG)
