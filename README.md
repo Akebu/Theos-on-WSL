@@ -43,9 +43,16 @@ source ~/.bashrc
 ```
 ## Workaround for fakeroot
 On version 15063.296, fakeroot doesn't work and return this error :
-``` fakeroot, while creating message channels: Function not implemented This may be due to a lack of SYSV IPC support. ```
+```
+Tony@DESKTOP-H7870G9:~$ fakeroot whoami
+fakeroot, while creating message channels: Function not implemented
+This may be due to a lack of SYSV IPC support.
+fakeroot: error while starting the `faked' daemon.
+kill : utilisation : kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... ou kill -l [sigspec]
+```
 
-Instead you can use  ```fakeroot-tcp```
+Instead you can use  ```fakeroot-tcp```, so we need to replace a line in /opt/theos/makefiles/package/deb.mk
 ```
 sudo sed -i 's/\$(FAKEROOT) -r/fakeroot-tcp/g'  /opt/theos/makefiles/package/deb.mk
 ```
+Enjoy!
