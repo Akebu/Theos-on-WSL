@@ -46,12 +46,6 @@ On version 15063.296, fakeroot doesn't work and return this error :
 ``` fakeroot, while creating message channels: Function not implemented This may be due to a lack of SYSV IPC support. ```
 
 Instead you can use  ```fakeroot-tcp```
-
-Navigate in  ```/opt/theos/makefiles/package/ ``` and replace deb.mk line 42 :
 ```
-$(ECHO_NOTHING)COPYFILE_DISABLE=1 $(FAKEROOT) -r $(_THEOS_PLATFORM_DPKG_DEB) -Z$(_THEOS_PLATFORM_DPKG_DEB_COMPRESSION) -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)"$(ECHO_END)
-```
-by
-```
-$(ECHO_NOTHING)COPYFILE_DISABLE=1 fakeroot-tcp $(_THEOS_PLATFORM_DPKG_DEB) -Z$(_THEOS_PLATFORM_DPKG_DEB_COMPRESSION) -b "$(THEOS_STAGING_DIR)" "$(_THEOS_DEB_PACKAGE_FILENAME)"$(ECHO_END)
+sudo sed -i 's/\$(FAKEROOT) -r/fakeroot-tcp/g'  /opt/theos/makefiles/package/deb.mk
 ```
